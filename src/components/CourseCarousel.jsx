@@ -7,7 +7,7 @@ import Course from './Course';
 function CourseCarousel() {
 
   const bestCoursesQueryListData = useBestCourses();
-  console.log(bestCoursesQueryListData)
+  // console.log(bestCoursesQueryListData)
 
   return (
       <div className='w-96'>
@@ -15,6 +15,7 @@ function CourseCarousel() {
         <Carousel className='' autoPlay={true} interval={1400}>
         {bestCoursesQueryListData.data && bestCoursesQueryListData?.data?.data?.data?.map((course,index) => (
           <Course 
+          key={Math.round(Math.random()*1000000000)}
           img={course.image_url}
           description={course.description}
           title={course.title}

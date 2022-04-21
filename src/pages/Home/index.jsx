@@ -270,13 +270,13 @@ export default function Home() {
         <div className='relative flex flex-col items-center gap-4'>
           <h1 className='heading_color'>Wall of Love</h1>
           <p className='relative'>
-            <div
+            <span
               style={{
                 backgroundImage:
                   'url(https://www.seekho.ai/assets/images/home-page/quoteIconRed.png)',
               }}
               className='absolute bg-cover bg-center bg-no-repeat top-[0px] -right-14 h-[37px] w-[50px]'
-            ></div>
+            ></span>
             <span className='pt-5'>random testimonial</span>
           </p>
           <div>ratings here</div>

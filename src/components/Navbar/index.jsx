@@ -3,7 +3,7 @@ import { ChevronDownIcon } from '@heroicons/react/solid';
 import React, { Fragment } from 'react';
 import CustomLink from '../CustomLink';
 
-const Navbar = () => {
+const Navbar = ({NavbarActive,setNavbarActive}) => {
   const AcademicsLinks = [
     {
       label: 'Finance',
@@ -44,11 +44,17 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className='flex justify-between items-center py-[15px] px-8 md:px-[90px] gap-4 border-b border-gray-300 shadow-md shadow-slate-600'>
+    <nav className='flex justify-between items-center py-[15px] px-8 md:px-[20px] lg:px-[90px] gap-4 border-b border-gray-300 shadow-md shadow-slate-600'>
       <div className='flex gap-2 items-center'>
+        <img 
+        onClick={() => setNavbarActive(!NavbarActive)}
+        className={`sm:hidden cursor-pointer 
+        `} 
+        // ${NavbarActive ? 'hover:bg-pink-500 hover:rounded-full' : ''}
+        src={NavbarActive?'/images/icons/x.svg':'https://www.seekho.ai/assets/images/menuIcon.svg'} alt='nav'/>
         <img
           src='https://www.seekho.ai/assets/images/newSeekhoLogo.webp'
-          className='w-[120px] md:w-[150px]'
+          className='w-[100px] lg:w-[150px]'
           alt='Site Logo'
         />
         {/* Academics start */}
@@ -81,17 +87,17 @@ const Navbar = () => {
                   <div className='overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5'>
                     <div className='p-4 bg-gray-50 flex flex-col'>
                       {AcademicsLinks.map((item, index) => (
-                        <>
+                        <div key={Math.round(Math.random()*100000000)}>
                           <div className=''>
                             <CustomLink
                               key={index}
-                              className='flow-root px-2 py-2 transition duration-150 ease-in-out rounded-md text-gray-750 hover:text-pink-500 cursor-pointer hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50'
+                              className='flow-root px-2 py-2 transition duration-150 ease-in-out rounded-md text-gray-750 hover:text-pink-500 cursor-pointer'
                               to={item.href}
                             >
                               {item.label}
                             </CustomLink>
                           </div>
-                        </>
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -103,14 +109,56 @@ const Navbar = () => {
 
         {/* Academics end */}
       </div>
+      <div className='sm:hidden bg-gray-100 p-2.5 rounded-full cursor-pointer'>
+        <img src='https://www.seekho.ai/assets/images/searchIconNav.svg' alt='search' />
+      </div>
       <div className='gap-6 items-center hidden md:flex'>
         <ul className='flex gap-3 items-center'>
-          <li>SeekhoX</li>
-          <li>Discussions</li>
-          <li>Talentboard</li>
+          <li className='flex items-center'>
+            <img
+              src='https://www.seekho.ai/assets/images/NavbarIcons/X.png'
+              className='-mt-1 w-5 h-5'
+            />
+            <CustomLink
+              className='flow-root px-2 py-2 transition duration-150 ease-in-out rounded-md text-gray-750 hover:text-pink-500 cursor-pointer'
+              to={''}
+            >
+              SeekhoX
+            </CustomLink>
+          </li>
+
+          <li className='flex items-center'>
+            <img
+              src='https://www.seekho.ai/assets/images/home-page/discussions.png'
+              className='-mt-1 w-5 h-5'
+            />
+            <CustomLink
+              className='flow-root px-2 py-2 transition duration-150 ease-in-out rounded-md text-gray-750 hover:text-pink-500 cursor-pointer'
+              to={''}
+            >
+              Discussions
+            </CustomLink>
+          </li>
+
+          <li className='flex items-center'>
+            <img
+              src='https://www.seekho.ai/assets/images/home-page/talentBoardIcon.png'
+              className='-mt-1 w-5 h-5'
+            />
+            <CustomLink
+              className='flow-root px-2 py-2 transition duration-150 ease-in-out rounded-md text-gray-750 hover:text-pink-500 cursor-pointer'
+              to={''}
+            >
+              Talentboard
+            </CustomLink>
+          </li>
         </ul>
         <button className='home-page-btn'>Login</button>
-        <div>ICON</div>
+        <img
+          src='https://www.seekho.ai/assets/images/menuIcon.svg'
+          alt='nav'
+          title={'NotFunctional'}
+        />
       </div>
     </nav>
   );
