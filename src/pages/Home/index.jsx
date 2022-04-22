@@ -1,6 +1,7 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import AutoWrite from '@/components/AutoWrite';
-import CourseCarousel from '../../components/CourseCarousel'
+import CourseCarousel from '../../components/CourseCarousel';
+
 
 export default function Home() {
   const AutoWriteText = [
@@ -55,6 +56,24 @@ export default function Home() {
       label: 'Mentors & Corporates',
     },
   ];
+  const [CurrentTimeline, setCurrentTimeline] = React.useState(0);
+
+
+useEffect(() => {
+  const interval = setInterval(() => {
+    setCurrentTimeline(CurrentTimeline + 1);
+    // 2 because of async nature of setstate
+    if(CurrentTimeline === 2) {
+      setCurrentTimeline(0);
+    }
+    
+  }, 2500);
+  return () => clearInterval(interval);
+}, [CurrentTimeline]);
+
+useEffect(() => {
+  console.log(CurrentTimeline);
+}, [CurrentTimeline]);
 
   return (
     <>
@@ -79,13 +98,16 @@ export default function Home() {
           <div className='my-[50px] flex justify-center items-center'>
             <div className='relative bg-white flex flex-col gap-4 w-4/5 md:w-[582px] p-4 md:p-8 border border-gray-200 shadow-lg rounded-xl'>
               <div className='absolute bottom-20 -left-40 justify-between items-center gap-2 shadow-lg rounded-l-3xl rounded-tr-3xl p-2 bg-white text-black hidden md:flex'>
-                <div className='bg-black rounded-full h-8 w-8'>
-                </div>
+                <div className='bg-black rounded-full h-8 w-8'></div>
                 {/* <img src="" alt="dp" /> */}
                 <p className='text-xs md:text-sm'>Say Bye to Boring Classes!</p>
               </div>
               <div className='w-full h-[200px] md:h-[304px] bg-black rounded-xl'>
-                  <img className='h-full w-full' src={`https://media3.giphy.com/media/WoKujxdDbtkFWc5Oww/giphy.gif?cid=ecf05e47p7ldof1vobtzfejuj9vs622jvi1torc5y4adyma3&rid=giphy.gif&ct=g`} alt="" />
+                <img
+                  className='h-full w-full'
+                  src={`https://media3.giphy.com/media/WoKujxdDbtkFWc5Oww/giphy.gif?cid=ecf05e47p7ldof1vobtzfejuj9vs622jvi1torc5y4adyma3&rid=giphy.gif&ct=g`}
+                  alt=''
+                />
               </div>
               <div className='bg-cover w-full h-[25px] md:h-[45px] flex  justify-between gap-4 px-2 md:px-8 '>
                 {Collaborators.map((item, index) => (
@@ -146,26 +168,98 @@ export default function Home() {
           </div>
         </div>
 
-  
+        <div className='mb-28 flex gap-4 justify-between items-center'>
+          <div className='w-1/2 flex gap-2 relative'>
+            <div className='meter'>
+              <span className='bullets'></span>
+              <span className='bullets'></span>
+              <span className='bullets'></span>
+              <span className='bullets'></span>
+              <span className='timeline'></span>
+            </div>
+            <div className='ml-2'>
+              <div
+                className={`h-1/3 transition-opacity duration-200 ease-linear ${
+                  CurrentTimeline === 0 ? 'opacity-100' : 'opacity-0'
+                }`}
+              >
+                <h1 className='heading_color text-3xl'>
+                  Live classes from Industry Gurus
+                </h1>
+                <p className='text-lg md:text-2xl text-gray-700'>
+                  Get access to 1000+ live classes directly from industry
+                  experts.
+                </p>
+              </div>
+              <div
+                className={`h-1/3 duration-200 ease-linear ${
+                  CurrentTimeline === 1 ? 'opacity-100' : 'opacity-0'
+                }`}
+              >
+                <h1 className='heading_color text-3xl'>Learning Community </h1>
+                <p className='text-lg md:text-2xl text-gray-700'>
+                  Select members are part of a learning community that’s always
+                  there for each other.
+                </p>
+              </div>
+              <div
+                className={`h-1/3 duration-200 ease-linear ${
+                  CurrentTimeline === 2 ? 'opacity-100' : 'opacity-0'
+                }`}
+              >
+                <h1 className='heading_color text-3xl'>Exclusive Mentorship</h1>
+                <p className='text-lg md:text-2xl text-gray-700'>
+                  Connect with Mentors via Live Classes, breakout sessions and
+                  discussion forums.
+                </p>{' '}
+              </div>
+              <div
+                className={`h-1/3 duration-200 ease-linear ${
+                  CurrentTimeline === 3 ? 'opacity-100' : 'opacity-0'
+                }`}
+              >
+                <h1 className='heading_color text-3xl'>Get Kickass Jobs</h1>
+                <p className='text-lg md:text-2xl text-gray-700'>
+                  Our mission is to get you closer to the most exciting jobs and
+                  internships.
+                </p>{' '}
+              </div>
+            </div>
+          </div>
+          <img
+            className='w-1/2'
+            src='https://www.seekho.ai/assets/images/home-page/seekhoSelect.webp'
+          />
+        </div>
+
+        {/* timeline part */}
+
         <div className='flex flex-col items-center gap-4 my-8'>
           <h1 className='heading_color'>Get the Best Courses from Us!</h1>
           <p className='text-2xl text-gray-700'>
-            Choose the best course that you would like to accelerate your career in
+            Choose the best course that you would like to accelerate your career
+            in
           </p>
-          <CourseCarousel/>
         </div>
+        <CourseCarousel />
       </section>
+
       {/* Industry Gurus */}
       <section className='px-8 md:px-32 pt-20 bg-pink-200 flex gap-4 flex-col items-center text-center md:text-left'>
-        <h1 className='heading_color'>Industry Gurus are here to help you</h1>
+        {/* <ScrollAnimation animateIn='fadeIn fadeOut'>
+            <h1 className='heading_color'>
+              Industry Gurus are here to help you
+            </h1>
+          </ScrollAnimation> */}
         <p className='text-center text-xl md:text-2xl text-gray-700'>
           Follow curated Industry Experts on Seekho. Connect with them via Live
           Classes, 1:1 sessions and discussion forums - it's as cool as that!
         </p>
+
         <button className='home-page-btn'>Learn from 500+ Gurus</button>
 
         {/* Images Part */}
-        <div className='relative w-full h-[200px] md:h-[600px]'>
+        <div className='relative w-full h-[200px] md:h-[600px]'>          
           <img
             src='https://www.seekho.ai/assets/images/home-page/mentor1.webp'
             className='absolute bottom-0 -left-8 md:left-0 h-[150px] sm:h-[300px] md:h-[500px]'
@@ -186,6 +280,7 @@ export default function Home() {
             className='absolute bottom-0 left-28 sm:left-44 md:left-96  h-[150px] sm:h-[250px] md:h-[480px] z-0'
             alt='mentor1'
           />
+
         </div>
       </section>
 
@@ -291,12 +386,16 @@ export default function Home() {
               backgroundImage:
                 'url(https://www.seekho.ai/assets/images/home-page/painPoint.webp)',
             }}
-            className='w-full h-[420px] md:h-[610px] bg-contain bg-no-repeat bg-center'
-          ></div>
+            className=' relative w-full h-[420px] md:h-[610px] bg-contain bg-no-repeat bg-center'
+          >
+            <span className='absolute -top-8 left-36 ripple md:top-0'></span>
+          </div>
         </div>
 
         <div className='w-full md:w-1/2 flex flex-col gap-4 justify-start items-start text-center md:text-left'>
-          <h1 className='heading_color'>bruh! How exactly do I achieve my career goals?</h1>
+          <h1 className='heading_color'>
+            bruh! How exactly do I achieve my career goals?
+          </h1>
           <p className='text-center md:text-left text-xl md:text-2xl text-gray-700'>
             Seekho Select has helped 70,000+ students accelerate their career so
             far.
@@ -369,7 +468,9 @@ export default function Home() {
           className='bg-contain bg-no-repeat bg-center w-full md:w-1/2 h-[380px] md:h-[500px]'
         ></div>
         <div className='w-full md:w-1/2 flex flex-col gap-6 justify-start items-start text-center md:text-left'>
-          <h1 className='heading_color'>All your career needs in a single app</h1>
+          <h1 className='heading_color'>
+            All your career needs in a single app
+          </h1>
           <p className='text-xl md:text-2xl tracking-wider text-gray-700'>
             Take classes on the go, interact with community and apply for
             kickass jobs

@@ -96,3 +96,137 @@ body {
   color: rgb(255, 89, 118);
   transition: color .15s ease-in-out;
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  scroll-behavior: smooth;
+
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  scroll-behavior: smooth;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+
+/* timeline part */
+
+.meter {
+  height: 500px;
+  width: 2px;
+  transform: translateX(-1px);
+  /* margin: 100px; */
+  /* position: absolute; */
+  background-image: repeating-linear-gradient(
+    180deg,
+    transparent 0 20px,
+    lightpink 20px 40px
+  );
+}
+.timeline {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(0deg, transparent 50%, rgb(255, 97, 124) 50%);
+  background-size: 200% 200%;
+  position: absolute;
+  /* animation-delay: 2s; */
+  -webkit-animation: Animation 8s ease infinite;
+  -moz-animation: Animation 8s ease infinite;
+  animation: Animation 8s linear infinite;
+}
+
+@-webkit-keyframes Animation {
+  100% {
+    background-position: 10% 0%;
+  }
+  0% {
+    background-position: 91% 100%;
+  }
+}
+@-moz-keyframes Animation {
+  100% {
+    background-position: 10% 0%;
+  }
+  0% {
+    background-position: 91% 100%;
+  }
+}
+@keyframes Animation {
+  100% {
+    background-position: 10% 0%;
+  }
+  0% {
+    background-position: 91% 100%;
+  }
+}
+
+.bullets {
+  height: 22px;
+  width: 22px;
+  border-radius: 50%;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 0%,
+    pink 100%
+  );
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}
+
+.bullets:nth-child(2) {
+  top: 33%;
+}
+.bullets:nth-child(3) {
+  top: 66%;
+}
+.bullets:nth-child(4) {
+  top: 100%;
+}
+
+/* timeline part */
+
+.ripple {
+  display: inline-block;
+  border-radius: 50%;
+  margin: 0 5px;
+  position: relative;
+}
+
+.ripple::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 40px;
+  height: 40px;
+  background-color: inherit;
+  border-radius: 50%;
+  z-index: -1;
+  animation: ripple 1.5s ease-out infinite;
+}
+
+.ripple:first-child {
+  background-color: #ff414d;
+}
+
+@keyframes ripple {
+    from {
+      opacity: 1;
+      transform: scale(0);
+    }
+    to {
+      opacity: 0;
+      transform: scale(3);
+    }
+}

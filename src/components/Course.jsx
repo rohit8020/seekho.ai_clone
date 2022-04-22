@@ -1,24 +1,21 @@
 import React from 'react'
 
 function Course({img,description,title,videos}) {
+  // console.log(description)
   return (
-    <div className='flex flex-col gap-2 w-full'>
-      <p className='font-bold text-2xl heading_color'>{title}</p>
-      <div className=' max-h-fit'>
-        <img className='rounded-lg h-36 w-full' src={img} alt="this is image" />
+    <div className='bg-gray-100 p-2 sm:p-4 rounded-lg w-[200px] sm:w-[330px] flex flex-col gap-2 border'>
+      <p className='font-bold text-xl heading_color h-7 overflow-y-hidden'>{title.substr(0,25)}{title.length > 25 && '...'}</p>
+      <p className='text-xs -mt-2 text-gray-500'>
+        {`Video Count - ${videos}`}
+      </p>
+      <div className=''>
+        <img className='border rounded-lg h-36 w-full' src={img} alt="this is image" />
       </div>
-      <p className='hovered_color'>
-        {
-          description.substr(60)
-        }
-        {
-          description.length > 60 && '...'
-        }
+      <p className='text-xs text-gray-500 h-12 overflow-y-auto'>
+        {description.substr(0,120)}
+        {description.length > 120 ? '...' : ''}
       </p>
-      <p className='heading_color'>
-        {`Video Count : ${videos}`}
-      </p>
-
+      <button className='home-page-btn text-xs sm:text-sm'>Enroll Now</button>
     </div>
   )
 }
